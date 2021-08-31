@@ -9,7 +9,6 @@ INCLUDES = ['btBulletDynamicsCommon.h', os.path.join('BulletCollision', 'Collisi
 # Startup
 
 
-import tools.shared as emscripten
 
 # Settings
 
