@@ -7,6 +7,18 @@ from subprocess import Popen, PIPE, STDOUT
 
 INCLUDES = ['btBulletDynamicsCommon.h', os.path.join('BulletCollision', 'CollisionShapes', 'btHeightfieldTerrainShape.h'), os.path.join('BulletCollision', 'CollisionDispatch', 'btGhostObject.h'), os.path.join('BulletDynamics', 'Character', 'btKinematicCharacterController.h')]
 
+# Startup
+
+exec(open(os.path.expanduser('~/.emscripten'), 'r').read())
+
+try:
+  EMSCRIPTEN_ROOT
+except:
+  print "ERROR: Missing EMSCRIPTEN_ROOT (which should be equal to emscripten's root dir) in ~/.emscripten"
+  sys.exit(1)
+
+sys.path.append(EMSCRIPTEN_ROOT)
+import tools.shared as emscripten
 
 # Settings
 
@@ -89,11 +101,11 @@ try:
   if cmake_build:
     if not os.path.exists('CMakeCache.txt'):
       stage('Configure via CMake')
-      emscripten.Building.configure([emscripten.PYTHON, os.path.join(EMSCRIPTEN_ROOT, 'emcmake'), 'cmake', '..', '-DBUILD_DEMOS=ON', '-DBUILD_EXTRAS=ON', '-DBUILD_CPU_DEMOS=ON', '-DUSE_GLUT=ON', '-DCMAKE_BUILD_TYPE=Release'])
+      emscripten.Building.configure([emscripten.PYTHON, os.path.join(EMSCRIPTEN_ROOT, 'emcmake'), 'cmake', '..', '-DBUILD_DEMOS=OFF', '-DBUILD_EXTRAS=OFF', '-DBUILD_CPU_DEMOS=OFF', '-DUSE_GLUT=OFF', '-DCMAKE_BUILD_TYPE=Release'])
   else:
     if not os.path.exists('config.h'):
       stage('Configure (if this fails, run autogen.sh in bullet/ first)')
-      emscripten.Building.configure(['../configure', '--disable-dependency-tracking'])
+      emscripten.Building.configure(['../configure', '--disable-demos','--disable-dependency-tracking'])
 
   stage('Make')
 
@@ -136,4 +148,3 @@ Ammo = AmmoLib();
 
 finally:
   os.chdir(this_dir);
-
