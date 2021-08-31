@@ -6,7 +6,7 @@ from subprocess import Popen, PIPE, STDOUT
 # Definitions
 
 INCLUDES = ['btBulletDynamicsCommon.h', os.path.join('BulletCollision', 'CollisionShapes', 'btHeightfieldTerrainShape.h'), os.path.join('BulletCollision', 'CollisionDispatch', 'btGhostObject.h'), os.path.join('BulletDynamics', 'Character', 'btKinematicCharacterController.h')]
-EMSCRIPTEN_ROOT = ~/emsdk-tot
+EMSCRIPTEN_ROOT = "~/emsdk-tot"
 # Startup
 
 exec(open(os.path.expanduser('~/emsdk-tot/.emscripten'), 'r').read())
