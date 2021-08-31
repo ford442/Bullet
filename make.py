@@ -101,11 +101,11 @@ try:
   if cmake_build:
     if not os.path.exists('CMakeCache.txt'):
       stage('Configure via CMake')
-      emscripten.Building.configure([emscripten.PYTHON, os.path.join(EMSCRIPTEN_ROOT, 'emcmake'), 'cmake', '..', '-DBUILD_DEMOS=OFF', '-DBUILD_EXTRAS=OFF', '-DBUILD_CPU_DEMOS=OFF', '-DUSE_GLUT=OFF', '-DCMAKE_BUILD_TYPE=Release'])
+      emscripten.Building.configure([emscripten.PYTHON, os.path.join(EMSCRIPTEN_ROOT, 'emcmake'), 'cmake', '..', '-DBUILD_DEMOS=ON', '-DBUILD_EXTRAS=ON', '-DBUILD_CPU_DEMOS=ON', '-DUSE_GLUT=ON', '-DCMAKE_BUILD_TYPE=Release'])
   else:
     if not os.path.exists('config.h'):
       stage('Configure (if this fails, run autogen.sh in bullet/ first)')
-      emscripten.Building.configure(['../configure', '--disable-demos','--disable-dependency-tracking'])
+      emscripten.Building.configure(['../configure', '--disable-dependency-tracking'])
 
   stage('Make')
 
