@@ -8,15 +8,7 @@ from subprocess import Popen, PIPE, STDOUT
 INCLUDES = ['btBulletDynamicsCommon.h', os.path.join('BulletCollision', 'CollisionShapes', 'btHeightfieldTerrainShape.h'), os.path.join('BulletCollision', 'CollisionDispatch', 'btGhostObject.h'), os.path.join('BulletDynamics', 'Character', 'btKinematicCharacterController.h')]
 # Startup
 
-exec(open(os.path.expanduser('~/.emscripten'), 'r').read())
 
-try:
-  EMSCRIPTEN_ROOT
-except:
-  print "ERROR: Missing EMSCRIPTEN_ROOT (which should be equal to emscripten's root dir) in ~/.emscripten"
-  sys.exit(1)
-
-sys.path.append(EMSCRIPTEN_ROOT)
 import tools.shared as emscripten
 
 # Settings
